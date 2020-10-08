@@ -49,8 +49,6 @@ _triSurface_ subdirectory: It contains **NACA 0012-34.stl** file. This file repr
 - **LES**: Uses large-eddy simulation (LES) or detached-eddy simulation (DES) modelling.
 In our setup we have chosen **kOmegaSST RAS model**.
 
-_printCoeffs_: on i.e _…Coeffs_ dictionary is printed to standard output when the model is created at the beginning of a run.
-
 
 ---
 
@@ -75,9 +73,9 @@ In addition to these 3 main data files, _system_directory also contain some othe
 - **blockMeshDict**: This data file is utilized for _blockMesh_ which is one of the most basic mesh generators in OpenFOAM. It relies on a single dictionary file _blockMeshDict_. As the name implies, blockMesh helps the user build the mesh with blocks. 
 
 - **createPatchDict**: This data file is utilized for _createPatch_, a Utility to create patches out of selected boundary faces. Faces come either from existing patches or from a faceSet. 
-1. It Creates new patches (from selected boundary faces)
-2. Synchronise faces on coupled patches 
-3. Synchronises points on coupled boundaries also remove patches with 0 faces in them.
+   1. It Creates new patches (from selected boundary faces)
+   2. Synchronise faces on coupled patches 
+   3. Synchronises points on coupled boundaries also remove patches with 0 faces in them.
 
 - **decomposeParDict**: When running a simulation in parallel, the geometry must first be decomposed (segmented) into individual geometries for each MPI process. These separate geometries are connected together with special processor boundary patches. Here we are using the _decomposePar_ utility which is a commonly used method to decompose domains and subsequently distribute the fields.
 

@@ -79,12 +79,12 @@ In addition to these 3 main data files, _system_directory also contain some othe
 
 - **decomposeParDict**: When running a simulation in parallel, the geometry must first be decomposed (segmented) into individual geometries for each MPI process. These separate geometries are connected together with special processor boundary patches. Here we are using the _decomposePar_ utility which is a commonly used method to decompose domains and subsequently distribute the fields.
 
-- **extrudeMeshDict**: This data file represents the function object _extrudeMeshDict_ which is used for extruding mesh from existing patch. _snappyHexMesh_ always generates 3D meshes (that's just how it is programmed), but we need a 2D mesh. The application extrudeMesh takes the lower and upper patches of the 3D mesh and extrudes a single cell layer (in our case). The specific extrution settings are defined in the extrudeMeshDict.
+- **extrudeMeshDict**: _snappyHexMesh_ always generates 3D meshes (that's just how it is programmed), but we need a 2D mesh. The application extrudeMesh takes the lower and upper patches of the 3D mesh and extrudes a single cell layer (in our case). The specific extrution settings are defined in the extrudeMeshDict.
 
 - **fvOptions**: This data file represents _fvOptions_ functionality in OpenFOAM is flexible framework to add various source terms to the governing equations without the need to rewrite the original source code. Many OpenFOAM applications contain equation systems that can be manipulated at run time via user-specified finite volume options, given by the shorthand _fvOptions_. These provide, e.g. additional source/sink terms or enforce constraints.
 
 
-- **snappyHexMeshDict**: This data file is utilized for _snappyHexMeshDict_ and the actual mesh generator is called _snappyHexMesh_. The snappyHexMeshDict defines meshing options and parameters for snappyHexMesh.
+- **snappyHexMeshDict**: The actual mesh generator is called _snappyHexMesh_. The snappyHexMeshDict defines meshing options and parameters for snappyHexMesh.
 
 - **solverInfo**: This file is utilized for The _solverInfo_ function object which reports the solver performance information for a list of fields such as residual fields, solver type, initial residual, final residual, number of solver iterations, convergence flag.
 

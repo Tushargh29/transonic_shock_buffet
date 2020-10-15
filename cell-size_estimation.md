@@ -18,24 +18,24 @@
 The physical properties and some important simulation conditions are defined in the [_README.md_](https://github.com/Tushargh29/transonic_shock_buffet/blob/master/test_cases/naca0012-34-base/README.md) file located at _transonic_shock_buffet/test_cases/naca0012-34-base/README.md_ path. Some physical properties required for this case are given below:
 - free-stream density: 1.186 kg/m³
 - free-stream velocity: 250.8 m/s
-- Dynamic viscosity: 0.0000182 N.s/m²
-- kinematic viscosity based on free-stream values: 0.000015342 m²/s
+- Dynamic viscosity: 1.82E-5 N.s/m²
+- kinematic viscosity based on free-stream values: 1.5342E-5 m²/s
 - characteristic length (chord length of airfoil): 0.18352 m
 
   ##### a. Calculation of Reynold's number:
 
   ![](https://latex.codecogs.com/gif.latex?Re%20%3D%20%5Cfrac%7B%5Cvarrho.U_%7Bfreestream%20%7D.L_%7BBoundary%20Layer%7D%7D%7B%5Cmu%20%7D)
   
-     ![](https://latex.codecogs.com/gif.latex?Re%20%3D%20%5Cfrac%7B%281.186%29.%28250.8%29.%280.18352%29%7D%7B0.0000182%7D)
+     ![](https://latex.codecogs.com/gif.latex?Re%20%3D%20%5Cfrac%7B%281.186%29.%28250.8%29.%280.18352%29%7D%7B1.82E-5%7D)
   
-  ![](https://latex.codecogs.com/gif.latex?Re%20%3D%203030000)
+  ![](https://latex.codecogs.com/gif.latex?Re%20%3D%203.03E6)
 
   ##### b. Estimate the skin friction using the Schlichting skin-friction correlation:
   ![](https://latex.codecogs.com/gif.latex?C_%7Bf%7D%20%3D%20%5B2log_%7B10%7D.%28Re_%7Bx%7D%29%20-%200.65%5D%5E%7B-2.3%7D)
   
   ![](https://latex.codecogs.com/gif.latex?C_%7Bf%7D%20%3D%20%5B12.965%20-%200.65%5D%5E%7B-2.3%7D)
  
-  ![](https://latex.codecogs.com/gif.latex?C_%7Bf%7D%20%3D%200.003104)
+  ![](https://latex.codecogs.com/gif.latex?C_%7Bf%7D%20%3D%203.104E-3)
 
   #### c. Calculation of Wall Shear stress:
    ![](https://latex.codecogs.com/gif.latex?%5Ctau%20_%7Bw%7D%20%3D%20C_%7Bf%7D.%5Cfrac%7B1%7D%7B2%7D.%5Cvarrho%20.U%5E%7B2%7D)
@@ -52,13 +52,13 @@ The physical properties and some important simulation conditions are defined in 
   ![](https://latex.codecogs.com/gif.latex?u_%7B*%7D%20%3D%209.88%20%5Cfrac%7Bm%7D%7Bs%7D)
 
   ##### e. Calculation of the wall distance(considering _yPlus = 1_):
-  ![](https://latex.codecogs.com/gif.latex?y%20%3D%20%5Cfrac%7By%5E%7B&plus;%7D.u%7D%7B%5Cvarrho%20.u_%7B*%7D%7D)
+  ![](https://latex.codecogs.com/gif.latex?y%20%3D%20%5Cfrac%7By%5E%7B&plus;%7D.%5Cmu%20%7D%7B%5Cvarrho%20.u_%7B*%7D%7D)
   
-  ![](https://latex.codecogs.com/gif.latex?y%20%3D%20%5Cfrac%7B%281%29.%280.0000182%29%7D%7B%281.186%29.%289.88%29%7D)
+  ![](https://latex.codecogs.com/gif.latex?y%20%3D%20%5Cfrac%7B%281%29.%281.82E-5%29%7D%7B%281.186%29.%289.88%29%7D)
   
-  ![](https://latex.codecogs.com/gif.latex?y%20%3D%200.0000015532%20meters)
+  ![](https://latex.codecogs.com/gif.latex?y%20%3D%201.55E-6%20meters)
 
-  **Now, we can say that the wall distance for _yPlus = 1_ is 0.0000015532 in meters**.
+  **Now, we can say that the wall distance for _yPlus = 1_ is 1.5532E-6 in meters**.
 
 ---
 
@@ -71,10 +71,10 @@ The physical properties and some important simulation conditions are defined in 
 - Select one random cell in roughly horizontal position. This ensures the correct alignment of the local and global cartesian systems.
 - Now select _extractSelection_ filter and click _Apply_.
 - Now observe the _Y Range_ bounds in the _Information_ tab. This value represents the thickness of the 1st cell from the wall. So the wall distance would be exactly half of this value.
-- **After successfully performing the post processing analysis, we got the value of wall distance roughly around 0.0001288 in meters.**
+- **After successfully performing the post processing analysis, we got the value of wall distance roughly around 1.288E-4 in meters.**
 - After getting both values of _wall distance_, we can calculate the scaling factor:
 
-![](https://latex.codecogs.com/gif.latex?Scaling%20factor%20%3D%20%5Cfrac%7B0.0001288%7D%7B0.00000155%7D%20%3D%2083.096)
+![](https://latex.codecogs.com/gif.latex?Scaling%20Factor%20%3D%20%5Cfrac%7B1.288E-4%7D%7B1.55E-6%7D)
 - **This means that we should refine our current existing mesh 83.096 times finer in order to reach the condition of resolving the boundary layer near the wall region(_yPlus = 1).**
 - Also, the _yPlus_ provided by the function object in the simultion is matching roughly with the above value. This denotes the correlation we made to calculate the skin friction is somewhat correct.
 
@@ -89,6 +89,7 @@ The physical properties and some important simulation conditions are defined in 
 
 
 - In this way, we have performed the _cell-size estimation_ at the airfoil surface.
+
 
 
 

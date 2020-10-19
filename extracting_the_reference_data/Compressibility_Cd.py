@@ -1,46 +1,47 @@
 # Importing the different libraries
 import numpy as np
 import pandas as pd
+import matplotlib as mpl
+import numpy as np
 from matplotlib import pyplot as plt
+from scipy.interpolate import interp1d
+
+# increase resolution and use Latex rendering
+mpl.rcParams['figure.dpi'] = 160
+mpl.rc('text', usetex=True)
 
 
 # Reading the data from .csv files
-data = pd.read_csv('Cd(0)-Cd(4).csv',delimiter=',')                     # Reading the Cd data for (alpha = 0 to alpha = 4) excluding alpha = 1
-data1 = pd.read_csv('Cd(5)-Cd(6).csv',delimiter=',')                    # Reading the Cd data for alpha = 5 to alpha = 6
-data2 = pd.read_csv('Cd(1).csv',delimiter=',')                          # Reading the Cd data for alpha = 1
+data = pd.read_csv('Cd(0)-Cd(4).csv', delimiter=',')                     # Reading the Cd data for (alpha = 0 to alpha = 4) excluding alpha = 1
+data1 = pd.read_csv('Cd(5)-Cd(6).csv', delimiter=',')                    # Reading the Cd data for alpha = 5 to alpha = 6
+data2 = pd.read_csv('Cd(1).csv', delimiter=',')                          # Reading the Cd data for alpha = 1
 
+# Creating plot
+fig, ax = plt.subplots(1, 1, figsize=(8, 5))
 
-# Assigning different columns of the data into series
-alpha_zero = data['Cd_0']
-alpha_one = data2['Cd_1']
-alpha_two = data['Cd_2']
-alpha_three = data['Cd_3']
-alpha_four = data['Cd_4']
-alpha_five = data1['Cd_5']
-alpha_six = data1['Cd_6']
+markers = ["x", "<", ">", "+", "o", "*", "^"]
+marker_size = 60
+color = "k"
 
-Mach_number = data['x']
-Mach_number1 = data1['x1']
-Mach_number2 = data2['x']
+cd = [data['Cd_0'], data2['Cd_1'], data['Cd_2'], data['Cd_3'], data['Cd_4'], data1['Cd_5'], data1['Cd_6']]
+ma = [data['x'], data2['x'], data['x'], data['x'], data['x'], data1['x1'], data1['x1']]
 
+for i in range(len(cd)):
+    ax.scatter(ma[i], cd[i], marker=markers[i], color=color, s=marker_size, label=r"$\alpha={:1d}^\circ$".format(i))
+    cubic_spline = interp1d(ma[i].values, cd[i].values, kind='cubic')
+    ma_spline = np.linspace(np.min(ma[i].values), np.max(ma[i].values), 100)
+    if i==0:
+        ax.plot(ma_spline, cubic_spline(ma_spline), ls=":", color=color, label="cubic spline")
+    else:
+        ax.plot(ma_spline, cubic_spline(ma_spline), ls=":", color=color)
 
+ax.set_xlabel(r"$Ma$")
+ax.set_ylabel(r"$c_d$")
+ax.legend()
 
-# Plotting of Cd curves for different alphas in the same figure
-plt.plot(Mach_number,alpha_zero, label='alpha = 0')
-plt.plot(Mach_number2,alpha_one,label='alpha = 1')
-plt.plot(Mach_number,alpha_two,label='alpha = 2')
-plt.plot(Mach_number,alpha_three,label='alpha = 3')
-plt.plot(Mach_number,alpha_four,label='alpha = 4')
-plt.plot(Mach_number1,alpha_five,label='alpha = 5')
-plt.plot(Mach_number1,alpha_six,label='alpha = 6')
-
-
-
-plt.legend()
-plt.xlabel('Mach Number (M)')
-plt.ylabel('Drag Coefficient (CD)')
-plt.title('Effect of compressibility on the Drag of the NACA 0012-34 airfoil')
-
-
+# save as PDF for general usage, e.g., inclusion in Latex documents
+plt.savefig("cd_over_ma_reference.pdf", bbox_inches="tight")
+# save as svg for web, e.g., Github, websites, ...
+plt.savefig("cd_over_ma_reference.svg", bbox_inches="tight")
+# show for convenience
 plt.show()
-

@@ -37,7 +37,10 @@ for i in range(len(cd)):
 
 ax.set_xlabel(r"$Ma$")
 ax.set_ylabel(r"$c_d$")
+<<<<<<< HEAD
 ax.set_title(r'Effect of compressibility on the drag of NACA0012-34 airfoil')
+=======
+>>>>>>> b98a661205d05878d24c389b70f4466900eb80a5
 ax.legend()
 
 # save as PDF for general usage, e.g., inclusion in Latex documents

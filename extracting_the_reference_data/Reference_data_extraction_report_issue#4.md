@@ -1,4 +1,4 @@
-# Extract reference data for drag and lift coefficients #Issue 4
+# Extraction of the reference data for drag and lift coefficients #Issue 4
 ---
 
 ### Objective:

@@ -12,9 +12,13 @@ mpl.rc('text', usetex=True)
 
 
 # Reading the data from .csv files
-data = pd.read_csv('Cl(0)-Cl(3).csv', delimiter=',')                     # Reading the Cl data for alpha = 0 to alpha = 3
-data1 = pd.read_csv('Cl(4)-Cl(6).csv', delimiter=',')                    # Reading the Cl data for alpha = 4 to alpha = 6
-
+data0 = pd.read_csv('cl_alpha_0.csv', delimiter=',')                     # Reading the Cl data for alpha = 0 to alpha = 3
+data1 = pd.read_csv('cl_alpha_1.csv', delimiter=',')                   # Reading the Cl data for alpha = 4 to alpha = 6
+data2 = pd.read_csv('cl_alpha_2.csv', delimiter=',')
+data3 = pd.read_csv('cl_alpha_3.csv', delimiter=',')
+data4 = pd.read_csv('cl_alpha_4.csv', delimiter=',')
+data5 = pd.read_csv('cl_alpha_5.csv', delimiter=',')
+data6 = pd.read_csv('cl_alpha_6.csv', delimiter=',')
 
 # Creating plot
 fig, ax = plt.subplots(1, 1, figsize=(8, 5))
@@ -23,8 +27,8 @@ markers = ["x", "<", ">", "+", "o", "*", "^"]
 marker_size = 60
 color = "k"
 
-cl = [data['Cl_0'], data['Cl_1'], data['Cl_2'], data['Cl_3'], data1['Cl_4'], data1['Cl_5'], data1['Cl_6']]
-ma = [data['x'], data['x'], data['x'], data['x'], data1['x1'], data1['x1'], data1['x1']]
+cl = [data0['Cl_0'], data1['Cl_1'], data2['Cl_2'], data3['Cl_3'], data4['Cl_4'], data5['Cl_5'], data6['Cl_6']]
+ma = [data0['x'], data1['x'], data2['x'], data3['x'], data4['x'], data5['x'], data6['x']]
 
 for i in range(len(cl)):
     ax.scatter(ma[i], cl[i], marker=markers[i], color=color, s=marker_size, label=r"$\alpha={:1d}^\circ$".format(i))
@@ -34,10 +38,13 @@ for i in range(len(cl)):
         ax.plot(ma_spline, cubic_spline(ma_spline), ls=":", color=color, label="cubic spline")
     else:
         ax.plot(ma_spline, cubic_spline(ma_spline), ls=":", color=color)
-
-ax.set_xlabel(r"$Ma$")
-ax.set_ylabel(r"$c_l$")
-ax.set_title(r'Effect of compressibility on the lift of NACA0012-34 airfoil')
+        
+      
+fontsize_label = 23
+fontsize_label1 = 15
+ax.set_xlabel(r"$Ma$", fontsize=fontsize_label1)
+ax.set_ylabel(r"$c_l$", fontsize=fontsize_label)
+ax.set_title(r'Effect of compressibility on the lift of NACA0012-34 airfoil',fontsize=fontsize_label1)
 ax.legend()
 
 # save as PDF for general usage, e.g., inclusion in Latex documents

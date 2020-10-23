@@ -20,11 +20,11 @@ To extract the reference data for drag and lift coefficients of the airfoil inve
 After implementing above steps, the recreating of the Cd and Cl plots is done.
 - **Effect of compressibility on the drag of the NACA 0012-34 airfoil:**
 ![Drag_reference_plot](https://github.com/Tushargh29/transonic_shock_buffet/blob/fbfdc8d2caca35968ecc8709c4f1bdf28fc26ddb/extracting_the_reference_data/Cd_reference_plot.png)
-![Drag_Plot](https://github.com/Tushargh29/transonic_shock_buffet/blob/master/extracting_the_reference_data/Effect_on_Drag.png)
+![Drag_Plot](https://github.com/Tushargh29/transonic_shock_buffet/blob/master/extracting_the_reference_data/effect_on_Drag.png)
 
 - **Effect of compressibility on the drag of the NACA 0012-34 airfoil:**
 ![Lift_reference_plot](https://github.com/Tushargh29/transonic_shock_buffet/blob/master/extracting_the_reference_data/Cl_reference_plot.png)
-![Lift_Plot](https://github.com/Tushargh29/transonic_shock_buffet/blob/master/extracting_the_reference_data/Effect_on_Lift.png)
+![Lift_Plot](https://github.com/Tushargh29/transonic_shock_buffet/blob/master/extracting_the_reference_data/effect_on_lift.png)
 
 ---
 In this way, the task of extracting the reference data of lift and drag coefficients is performed.

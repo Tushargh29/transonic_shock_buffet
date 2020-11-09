@@ -9,40 +9,44 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       volVectorField;
-    object      U;
+    class       volScalarField;
+    object      k;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-Uinlet          (250.8 0 0);
+kInlet          0.01;
 
-dimensions      [0 1 -1 0 0 0 0];
+dimensions      [0 2 -2 0 0 0 0];
 
-internalField   uniform $Uinlet;
+internalField   uniform $kInlet;
 
 boundaryField
 {
     inlet
     {
-        type            freestreamVelocity;
-        freestreamValue uniform $Uinlet;
+        type            inletOutlet;
+        inletValue      uniform $kInlet;
+        value           uniform $kInlet;
     }
 
     outlet
     {
-        type            freestreamVelocity;
-        freestreamValue uniform $Uinlet;
+        type            inletOutlet;
+        inletValue      uniform $kInlet;
+        value           uniform $kInlet;
     }
 
     topAndBottom
     {
-        type            freestreamVelocity;
-        freestreamValue uniform $Uinlet;
+        type            inletOutlet;
+        inletValue      uniform $kInlet;
+        value           uniform $kInlet;
     }
 
     airfoil
     {
-        type            noSlip;
+        type            kqRWallFunction;
+        value           uniform $kInlet;
     }
 
     front
@@ -53,6 +57,12 @@ boundaryField
     back
     {
         type            empty;
+    }
+    
+    processor
+    {
+        type  processor;
+        value $internalField;
     }
 }
 

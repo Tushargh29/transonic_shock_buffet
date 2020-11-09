@@ -10,44 +10,38 @@ FoamFile
     version     2.0;
     format      ascii;
     class       volScalarField;
-    object      p;
+    object      alphat;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-pOut            1e5;
+dimensions      [1 -1 -1 0 0 0 0];
 
-dimensions      [1 -1 -2 0 0 0 0];
-
-internalField   uniform $pOut;
+internalField   uniform 0;
 
 boundaryField
 {
-    outlet
-    {
-        type            waveTransmissive;
-        field           p;
-        psi             thermo:psi;
-        gamma           1.4;
-        fieldInf        $pOut;
-        lInf            1.1;
-        value           uniform $pOut;
-    }
-
     inlet
     {
-        type            freestreamPressure;
-        freestreamValue uniform $pOut;
+        type            calculated;
+        value           uniform 0;
+    }
+
+    outlet
+    {
+        type            calculated;
+        value           uniform 0;
     }
 
     topAndBottom
     {
-        type            freestreamPressure;
-        freestreamValue uniform $pOut;
+        type            calculated;
+        value           uniform 0;
     }
 
     airfoil
     {
-        type            zeroGradient;
+        type            compressible::alphatWallFunction;
+        value           uniform 0;
     }
 
     front
@@ -58,6 +52,12 @@ boundaryField
     back
     {
         type            empty;
+    }
+    
+    processor
+    {
+        type  processor;
+        value $internalField;
     }
 }
 

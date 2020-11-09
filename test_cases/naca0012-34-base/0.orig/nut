@@ -10,11 +10,11 @@ FoamFile
     version     2.0;
     format      ascii;
     class       volScalarField;
-    object      alphat;
+    object      nut;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [1 -1 -1 0 0 0 0];
+dimensions      [0 2 -1 0 0 0 0];
 
 internalField   uniform 0;
 
@@ -40,7 +40,8 @@ boundaryField
 
     airfoil
     {
-        type            compressible::alphatWallFunction;
+        type            nutkWallFunction;
+        type            nutkWallFunction;
         value           uniform 0;
     }
 
@@ -52,6 +53,12 @@ boundaryField
     back
     {
         type            empty;
+    }
+    
+    processor
+    {
+        type  processor;
+        value $internalField;
     }
 }
 

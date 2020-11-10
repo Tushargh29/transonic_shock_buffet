@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# where to run
+case=${1:-./}
+
+# singularity commands for serial and parallel execution
+runSerial="singularity run of2006-py1.6-cpu.sif"
+runParallel="mpirun -np 2 singularity run of2006-py1.6-cpu.sif"
+
+# preprocessing
+## parallel meshing
+$runSerial ./transformGeometry $case
+echo "Running blockMesh on " $case
+$runSerial "blockMesh" $case &> ${case}log.blockMesh
+echo "Running decomposePar on " $case
+$runSerial "decomposePar" $case &> ${case}log.decomposePar
+echo "Running snappyHexMesh on " $case
+$runParallel "snappyHexMesh -parallel -overwrite" $case &> ${case}log.snappyHexMesh
+echo "Running extrudeMesh on " $case
+$runParallel "extrudeMesh -parallel" $case &> ${case}log.extrudeMesh
+echo "Running createPatch on " $case
+$runParallel "createPatch -parallel -overwrite" $case &> ${case}log.createPatch
+echo "Running transformPoints on " $case
+$runParallel "transformPoints -parallel -scale 0.18352" $case &> ${case}log.transformPoints
+## reconstruct mesh and decompose again to reduce load imbalance
+echo "Running reconstructParMesh on " $case
+$runSerial "reconstructParMesh -constant" $case &> ${case}log.reconstructParMesh
+echo "Removing processor folders in " $case
+$runSerial "rm -r processor*" $case
+echo "Running decomposePar on " $case
+$runSerial "decomposePar -decomposeParDict system/decomposeParDict.run" $case &> ${case}log.decomposePar.run
+$runSerial ./restore0 $case
+touch ${case}post.foam
+
+# execute solver
+echo "Running rhoPimpleFoam on " $case
+$runParallel "rhoPimpleFoam -parallel -decomposeParDict system/decomposeParDict.run" $case &> ${case}log.rhoPimpleFoam

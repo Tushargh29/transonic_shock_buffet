@@ -10,5 +10,4 @@ module load mpi/openmpi/4.0.1/cuda_aware_gcc_6.3.0
 
 mkdir run
 cp -r test_cases/naca0012-34-base run/
-singularity run openfoam-v2006.sif ./Allrun.serial run/naca0012-34-base/
-mpirun -np 2 singularity run openfoam-v2006.sif ./Allrun.parallel run/naca0012-34-base/
+./runCase run/naca0012-34-base/

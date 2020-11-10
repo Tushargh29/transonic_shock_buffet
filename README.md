@@ -2,31 +2,36 @@
 
 ## Creating the Singularity image
 
-To make results reproducible, a [Singularity](https://sylabs.io/guides/3.6/user-guide/) image containing OpenFOAM is used to perform simulations. To install Singularity, follow the official [installation instructions](https://sylabs.io/guides/3.6/user-guide/quick_start.html). The image is built based on the [ESI-OpenCFD Docker image](https://openfoam.com/download/install-binary-linux.php). Building the image requires root privileges. Once the image is built, any user can use the image without any extra privileges. To build the image, run:
+To make results reproducible, a [Singularity](https://sylabs.io/guides/3.6/user-guide/) image containing OpenFOAM is used to perform simulations. To install Singularity, follow the official [installation instructions](https://sylabs.io/guides/3.6/user-guide/quick_start.html). More information on the image may be found [here](https://github.com/AndreWeiner/of_pytorch_docker). Building the image requires root privileges. Once the image is built, any user can use the image without any extra privileges. To build the image, run:
 
 ```
-sudo singularity build openfoam-v2006.sif openfoam-v2006.def
+sudo singularity build of2006-py1.6-cpu.sif Singularity.def
 ```
 
 To check if the image is working, run:
 
 ```
-singularity run-help openfoam-v2006.sif
+singularity run-help of2006-py1.6-cpu.sif
 # ...
 # expected output
 # ...
-Simple Singularity container based on the official OpenFOAM-plus
-Docker image. Currently, the following execution modes are available:
+  Simple Singularity image containing OpenFOAM-v2006
+  and libtorch (PyTorch 1.6). The generic syntax to execute
+  a command with arguments is
 
-  run - execute the Allrun script in an OpenFOAM case
-    singularity run openfoam-v2006.sif run /path/to/case
+  singularity run image_name.sif command [path] [argument]
 
-  clean - execute the Allclean script in an OpenFOAM case
-    singularity run openfoam-v2006.sif clean /path/to/case
+  Examples:
 
-  app - execute an OpenFOAM app or utility
-    singularity run openfoam-v2006.sif app icoFoam -help
-    singularity run openfoam-v2006.sif app paraFoam "-case path/to/case"
+  - compile the application tensorCreation using wmake
+    singularity run of2006-py1.6-cpu.sif wmake test/tensorCreation/
+
+  - clean tensorCreation build
+    singularity run of2006-py1.6-cpu.sif wclean test/tensorCreation/
+
+  - run tensorCreation
+    singularity run of2006-py1.6-cpu.sif ./tensorCreation test/tensorCreation/
+
 ```
 
 ## Performing a simulation
@@ -37,13 +42,12 @@ The folder *test_cases* contains all basic OpenFOAM simulation cases. Simulation
 # top-level folder of the repository
 mkdir run
 # make a copy of the simulation case
-cp -r test_cases/naca0012-34-base/ run/naca0012-34-test
-# execute the Allrun script in the new test case
-singularity run openfoam-v2006.sif run run/naca0012-34-test/
-# post-processing using ParaView (from the image)
-singularity run openfoam-v2006.sif app paraFoam "-case run/naca0012-34-test"
-# or using a local ParaView installation
-cd run/naca0012-34-test/
+cp -r test_cases/naca0012-34-base/ run/test_base
+# execute the runCase script in the top-level folder where the image is located
+# the first argument must be the path to the simulation case
+./runCase run/test_base/
+# post-processing using local ParaView installation
+cd run/test_base
 paraview post.foam
 ```
 

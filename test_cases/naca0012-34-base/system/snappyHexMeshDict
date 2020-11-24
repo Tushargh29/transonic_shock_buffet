@@ -40,6 +40,30 @@ geometry
         min     (-1 -1 -1);
         max     ( 5  1  1);
     }
+    
+    airfoil
+    {
+        type    airfoil
+        min     (1.5 1 -0.5);
+        max     (3.5 2 0.5);
+    }
+    
+    wakeBox
+    {
+        type    box
+        min     (2 2.5 -1);
+        max     (4 3.5  1);
+    }
+    
+    shockBox
+    {
+        type    airfoil
+        min     (2 2.5 -1);
+        max     (4 3.5  1);
+    }
+    
+    
+    
 }
 
 
@@ -98,7 +122,7 @@ castellatedMeshControls
         airfoil
         {
             // Surface-wise min and max refinement level
-            level (6 6);
+            level (8 8);
         }
     }
 
@@ -129,7 +153,33 @@ castellatedMeshControls
         
         
         
+        airfoil
+        {
+            mode distance;
+            levels
+            (
+            (2.0 3)  // within first 2.0 m refinement level 3
+            (3.0 2)  // within first 3.0 m refinement level 2
+            );
+        }
         
+        
+        
+        
+        wakeBox
+        {
+            mode inside;
+            levels ((10000 1));
+        }
+        
+        
+        
+        
+        shockBox
+        {
+            mode inside;
+            levels ((10000 1));
+        }
     }
 
 
@@ -186,7 +236,7 @@ addLayersControls
     {
         airfoil
         {
-            nSurfaceLayers 3;
+            nSurfaceLayers 8;
         }
     }
 

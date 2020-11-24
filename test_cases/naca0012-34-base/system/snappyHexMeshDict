@@ -122,7 +122,7 @@ castellatedMeshControls
         airfoil
         {
             // Surface-wise min and max refinement level
-            level (8 8);
+            level (7 7);
         }
     }
 
@@ -236,7 +236,7 @@ addLayersControls
     {
         airfoil
         {
-            nSurfaceLayers 6;
+            nSurfaceLayers 7;
         }
     }
 

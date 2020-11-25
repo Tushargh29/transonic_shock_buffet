@@ -163,7 +163,7 @@ castellatedMeshControls
         wakeBox
         {
             mode inside;
-            levels ((1e15 3));
+            levels ((1e15 4));
         }
         
         
@@ -172,7 +172,7 @@ castellatedMeshControls
         shockBox
         {
             mode inside;
-            levels ((1e15 3));
+            levels ((1e15 4));
         }
     }
 

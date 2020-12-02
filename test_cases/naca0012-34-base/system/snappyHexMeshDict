@@ -44,21 +44,21 @@ geometry
     
     wakeBox
     {
-        type    box;
+        type    searchableBox;
         min     (0.816 -1.632 -1);
         max     (4.896 1.904  1);
     }
     
     shockBox
     {
-        type    box;
+        type    searchableBox;
         min     (-1.088 -0.816 -1);
         max     (3.536 1.904  1);
     }
     
     
     
-}
+};
 
 
 // Settings for the castellatedMesh generation.
@@ -116,7 +116,7 @@ castellatedMeshControls
         airfoil
         {
             // Surface-wise min and max refinement level
-            level (8 8);
+            level (7 7);
         }
     }
 
@@ -163,7 +163,7 @@ castellatedMeshControls
         wakeBox
         {
             mode inside;
-            levels ((1000 10));
+            levels ((1000 6));
         }
         
         
@@ -171,7 +171,7 @@ castellatedMeshControls
         shockBox
         {
             mode inside;
-            levels ((1000 10));
+            levels ((1000 6));
         }
     }
 

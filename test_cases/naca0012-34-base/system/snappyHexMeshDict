@@ -116,7 +116,7 @@ castellatedMeshControls
         airfoil
         {
             // Surface-wise min and max refinement level
-            level (7 7);
+            level (8 8);
         }
     }
 
@@ -163,7 +163,7 @@ castellatedMeshControls
         wakeBox
         {
             mode inside;
-            levels ((1e15 6));
+            levels ((1e15 7));
         }
         
         
@@ -172,7 +172,7 @@ castellatedMeshControls
         shockBox
         {
             mode inside;
-            levels ((1e15 6));
+            levels ((1e15 7));
         }
     }
 
@@ -230,7 +230,7 @@ addLayersControls
     {
         airfoil
         {
-            nSurfaceLayers 7;
+            nSurfaceLayers 8;
         }
     }
 

@@ -45,15 +45,15 @@ geometry
     wakeBox
     {
         type    box;
-        min     (0.15 -0.15 -1);
-        max     (0.45 0.2  1);
+        min     (0.816 -0.816 -1);
+        max     (2.448 1.088  1);
     }
     
     shockBox
     {
         type    box;
-        min     (-0.1 -0.1 -1);
-        max     (0.45 0.2  1);
+        min     (-0.544 -0.544 -1);
+        max     (2.448 1.088  1);
     }
     
     

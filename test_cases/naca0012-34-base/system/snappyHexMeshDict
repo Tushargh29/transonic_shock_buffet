@@ -45,15 +45,15 @@ geometry
     wakeBox
     {
         type    box;
-        min     (0.816 -0.816 -1);
-        max     (2.448 1.088  1);
+        min     (0.816 -1.632 -1);
+        max     (4.896 1.904  1);
     }
     
     shockBox
     {
         type    box;
-        min     (-0.544 -0.544 -1);
-        max     (2.448 1.088  1);
+        min     (-1.088 -0.816 -1);
+        max     (3.536 1.904  1);
     }
     
     
@@ -163,16 +163,15 @@ castellatedMeshControls
         wakeBox
         {
             mode inside;
-            levels ((1e15 7));
+            levels ((1000 10));
         }
-        
         
         
         
         shockBox
         {
             mode inside;
-            levels ((1e15 7));
+            levels ((1000 10));
         }
     }
 

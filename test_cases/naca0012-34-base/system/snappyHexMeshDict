@@ -36,26 +36,26 @@ geometry
 
     refinementBox
     {
-        type    box;
+        type    searchableBox;
         min     (-1 -1 -1);
         max     ( 5  1  1);
     }
 
     wakeBox
     {
-        type    box;
+        type    searchableBox;
         min     (0 -0.2 -1);
-        max     (2  0.2  1);
-    }
-    
+        max     (5  0.2  1);
+    } 
+   
     shockBox
     {
-        type    box;
+        type    searchableBox;
         min     (0   0 -1);
         max     (0.5 1  1);
     }
-    
-}
+};
+>>>>>>> upstream/master
 
 
 // Settings for the castellatedMesh generation.
@@ -68,14 +68,14 @@ castellatedMeshControls
     // If local number of cells is >= maxLocalCells on any processor
     // switches from from refinement followed by balancing
     // (current method) to (weighted) balancing before refinement.
-    maxLocalCells 100000;
+    maxLocalCells 2000000;
 
     // Overall cell limit (approximately). Refinement will stop immediately
     // upon reaching this number so a refinement level might not complete.
     // Note that this is the number of cells before removing the part which
     // is not 'visible' from the keepPoint. The final number of cells might
     // actually be a lot less.
-    maxGlobalCells 2000000;
+    maxGlobalCells 8000000;
 
     // The surface refinement loop might spend lots of iterations refining just
     // a few cells. This setting will cause refinement to stop if <=
@@ -147,22 +147,23 @@ castellatedMeshControls
             mode distance;
             levels
             (
-            (0.3 4)  // within first 2.0 m refinement level 3
-            (1.0 2)  // within first 3.0 m refinement level 2
+              (0.3 4)  // within first 2.0 m refinement level 4
+              (1.0 2)  // within first 3.0 m refinement level 2
             );
         }
         
         wakeBox
         {
             mode inside;
-            levels ((10000 4));
+            levels ((1e15 3));
         }
         
         shockBox
         {
             mode inside;
-            levels ((10000 4));
+            levels ((1e15 3));
         }
+        
     }
 
 

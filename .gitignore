@@ -4,4 +4,4 @@ __pycache__
 run
 *.sif
 Imp_docs
-
+slurm*

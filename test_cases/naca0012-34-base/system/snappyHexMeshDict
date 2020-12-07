@@ -220,7 +220,7 @@ addLayersControls
     {
         airfoil
         {
-            nSurfaceLayers 8;
+            nSurfaceLayers 10;
         }
     }
 

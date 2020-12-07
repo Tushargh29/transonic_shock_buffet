@@ -55,7 +55,7 @@ geometry
         max     (0.9 0.8 1);
     }
     
-    smallwakeBox
+    trailingBox
     {
         type    searchableBox;
         min     (0.68 0 -1);
@@ -169,10 +169,10 @@ castellatedMeshControls
             levels ((1e15 4));
         }
         
-        smallwakeBox
+        trailingBox
         {
             mode inside;
-            levels ((1e15 5));
+            levels ((1e15 4));
         }
     }
 
@@ -230,7 +230,7 @@ addLayersControls
     {
         airfoil
         {
-            nSurfaceLayers 6;
+            nSurfaceLayers 7;
         }
     }
 

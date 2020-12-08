@@ -55,7 +55,12 @@ geometry
         max     (0.9 0.8 1);
     }
     
-    
+    trailingBox
+    {
+        type    searchableBox;
+        min     (0.68  0   -1);
+        max     (2.17 -0.10 1);
+    } 
     
 }
 
@@ -165,7 +170,11 @@ castellatedMeshControls
             levels ((1e15 4));
         }
         
-        
+        trailingBox
+        {
+            mode inside;
+            levels ((1e15 4));
+        }
     }
 
 

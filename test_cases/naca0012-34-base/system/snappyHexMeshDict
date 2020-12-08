@@ -58,8 +58,8 @@ geometry
     trailingBox
     {
         type    searchableBox;
-        min     (0.68  0   -1);
-        max     (2.17 -0.10 1);
+        min     (0.68  -0.10   -1);
+        max     (2.17    0      1);
     } 
     
 }

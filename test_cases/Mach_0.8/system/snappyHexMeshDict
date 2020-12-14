@@ -185,7 +185,7 @@ castellatedMeshControls
         precisionBox
         {
             mode inside;
-            levels ((1e15 6));
+            levels ((1e15 8));
         }
     }
 

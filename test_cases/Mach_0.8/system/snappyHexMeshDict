@@ -62,12 +62,7 @@ geometry
         max     (2.72   0.10  1);
     } 
     
-    precisionBox
-    {
-        type    searchableBox;
-        min     (0.81  -0.16 -1);
-        max     (1.08  -0.05  1);
-    } 
+   
 }
 
 // Settings for the castellatedMesh generation.
@@ -87,7 +82,7 @@ castellatedMeshControls
     // Note that this is the number of cells before removing the part which
     // is not 'visible' from the keepPoint. The final number of cells might
     // actually be a lot less.
-    maxGlobalCells 8000000;
+    maxGlobalCells 32000000;
 
     // The surface refinement loop might spend lots of iterations refining just
     // a few cells. This setting will cause refinement to stop if <=
@@ -125,7 +120,7 @@ castellatedMeshControls
         airfoil
         {
             // Surface-wise min and max refinement level
-            level (7 7);
+            level (6 6);
         }
     }
 
@@ -182,11 +177,7 @@ castellatedMeshControls
             levels ((1e15 4));
         }
         
-        precisionBox
-        {
-            mode inside;
-            levels ((1e15 9));
-        }
+        
     }
 
 

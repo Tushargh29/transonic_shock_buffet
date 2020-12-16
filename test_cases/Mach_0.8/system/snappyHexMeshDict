@@ -154,27 +154,27 @@ castellatedMeshControls
             mode distance;
             levels
             (
-              (0.1 6)  // within first 0.1 m refinement level 6
-              (0.4 3)  // within first 0.4 m refinement level 3
+              (0.1 5)  // within first 0.1 m refinement level 5
+              (0.4 4)  // within first 0.4 m refinement level 4
             );
         }
         
         wakeBox
         {
             mode inside;
-            levels ((1e15 3));
+            levels ((1e15 2));
         }
         
         shockBox
         {
             mode inside;
-            levels ((1e15 4));
+            levels ((1e15 3));
         }
         
         trailingBox
         {
             mode inside;
-            levels ((1e15 4));
+            levels ((1e15 3));
         }
         
         

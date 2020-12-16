@@ -155,7 +155,7 @@ castellatedMeshControls
             levels
             (
               (0.1 5)  // within first 0.1 m refinement level 5
-              (0.4 4)  // within first 0.4 m refinement level 4
+              (0.4 2)  // within first 0.4 m refinement level 2
             );
         }
         

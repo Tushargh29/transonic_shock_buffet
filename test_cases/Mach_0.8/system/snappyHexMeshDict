@@ -62,7 +62,6 @@ geometry
         max     (2.72   0.10  1);
     } 
     
-   
 }
 
 // Settings for the castellatedMesh generation.
@@ -176,9 +175,6 @@ castellatedMeshControls
             mode inside;
             levels ((1e15 3));
         }
-        
-       
-        
     }
 
 

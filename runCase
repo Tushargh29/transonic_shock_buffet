@@ -10,6 +10,8 @@ runParallel="mpirun -np 16 singularity run of2006-py1.6-cpu.sif"
 # preprocessing
 ## parallel meshing
 $runSerial ./transformGeometry $case
+echo "Running surfaceFeatureExtract on " $case
+$runSerial "surfaceFeatureExtract" $case &> ${case}log.surfaceFeatureExtract
 echo "Running blockMesh on " $case
 $runSerial "blockMesh" $case &> ${case}log.blockMesh
 echo "Running decomposePar on " $case

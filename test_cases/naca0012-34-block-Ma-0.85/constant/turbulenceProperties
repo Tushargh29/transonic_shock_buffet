@@ -18,6 +18,7 @@ simulationType RAS;
 
 RAS
 {
+    // kOmegaSST, LRR
     RASModel            kOmegaSST;
     turbulence          on;
     printCoeffs         on;

@@ -29,11 +29,11 @@ echo "Running reconstructParMesh on " $case
 $runSerial "reconstructParMesh -constant" $case &> ${case}log.reconstructParMesh
 echo "Removing processor folders in " $case
 $runSerial "rm -r processor*" $case
-echo "Running decomposePar on " $case
-$runSerial "decomposePar -decomposeParDict system/decomposeParDict.run" $case &> ${case}log.decomposePar.run
-$runSerial ./restore0 $case
+#echo "Running decomposePar on " $case
+#$runSerial "decomposePar -decomposeParDict system/decomposeParDict.run" $case &> ${case}log.decomposePar.run
+#$runSerial ./restore0 $case
 touch ${case}post.foam
 
 # execute solver
-echo "Running rhoPimpleFoam on " $case
-$runParallel "rhoPimpleFoam -parallel -decomposeParDict system/decomposeParDict.run" $case &> ${case}log.rhoPimpleFoam
+#echo "Running rhoPimpleFoam on " $case
+#$runParallel "rhoPimpleFoam -parallel -decomposeParDict system/decomposeParDict.run" $case &> ${case}log.rhoPimpleFoam

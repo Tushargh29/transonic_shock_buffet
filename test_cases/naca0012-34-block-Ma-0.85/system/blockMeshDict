@@ -19,7 +19,7 @@ scale 0.157637;
 domain
 {
     xMin -4;
-    xMax  4;
+    xMax  6;
     yMin -2;
     yMax  2;
     zMin -0.01;
@@ -27,17 +27,19 @@ domain
 
     // Number of cells
     yCells  160; // airfoil to far field
-    yGap    16;  // resolution of trailing edge
-    xUCells 60; // upstream
-    xMCellsLower 60; // middle low
+    yGap     8;  // resolution of trailing edge
+    xUCells 60;  // upstream
+    xMCellsLower 100; // middle low
     xMCellsUpper 100; // middle up
-    xDCells 80; // downstream
+    xDCells 210; // downstream
 
     // Mesh grading
-    yGrading       500; // airfoil to far field
-    xUGrading      10; // towards centre upstream
-    xUGradingInv  0.1; // inverse of xUGrading
-    xDGrading      40; // downstream
+    yGrading      100;  // airfoil to far field
+    xUGrading      10;  // towards centre upstream
+    xUGradingInv  0.1;  // inverse of xUGrading
+    xMGrading        5;  // towards trailing edge
+    xMGradingInv 0.2;  // towards trailing edge
+    xDGrading      40;  // downstream
     xDGradingInv 0.025; // inverse of downstream grading
 }
 
@@ -113,7 +115,7 @@ blocks
     // 1
     hex (19 20 15 14 5 6 1 0)
     ($:domain.xMCellsLower $:domain.yCells 1)
-    simpleGrading (1 $:domain.yGrading 1)
+    simpleGrading ($:domain.xMGradingInv $:domain.yGrading 1)
 
     // 2
     hex (20 21 16 15 6 7 2 1)
@@ -128,7 +130,7 @@ blocks
     // 4
     hex (23 22 25 26 9 8 11 12)
     ($:domain.xMCellsUpper $:domain.yCells 1)
-    simpleGrading (1 $:domain.yGrading 1)
+    simpleGrading ($:domain.xMGrading $:domain.yGrading 1)
 
     // 5
     hex (24 23 26 27 10 9 12 13)

@@ -25,14 +25,14 @@ domain
     zMin -0.01;
     zMax  0.01;
 
-    // Number of cells
-    yCells  320; // airfoil to far field
-    yGap     16;  // resolution of trailing edge
-    xUCells 120;  // upstream
-    xMCellsLower 200; // middle low
-    xMCellsUpper 200; // middle up
-    xDCells 420; // downstream
-
+    // Number of cells for new fine mesh
+    yCells  640; // airfoil to far field
+    yGap     32;  // resolution of trailing edge
+    xUCells 240;  // upstream
+    xMCellsLower 400; // middle low
+    xMCellsUpper 400; // middle up
+    xDCells 840; // downstream
+    
     // Mesh grading
     yGrading      100;  // airfoil to far field
     xUGrading      10;  // towards centre upstream

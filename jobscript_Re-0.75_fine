@@ -8,7 +8,7 @@
 module load singularity/3.6.0rc2
 module load mpi/openmpi/4.0.1/cuda_aware_gcc_6.3.0
 
-mkdir -p run
-cp -r test_cases/naca-Re-0.75-Ma-0.85-fine run/
+#mkdir -p run
+#cp -r test_cases/naca-Re-0.75-Ma-0.85-fine run/
 cd run/naca-Re-0.75-Ma-0.85-fine
 ./Allrun 16

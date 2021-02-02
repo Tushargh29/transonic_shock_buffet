@@ -1,0 +1,14 @@
+#!/bin/bash -l
+#SBATCH --partition=standard
+#SBATCH --nodes=1
+#SBATCH --time=120:00:00
+#SBATCH --job-name=naca-0012-34
+#SBATCH --ntasks-per-node=8
+
+module load singularity/3.6.0rc2
+module load mpi/openmpi/4.0.1/cuda_aware_gcc_6.3.0
+
+mkdir -p run
+cp -r test_cases/naca-Re-3-Ma-0.83-base_alpha-4_k-0.00001 run/
+cd run/naca-Re-3-Ma-0.83-base_alpha-4_k-0.00001
+./Allrun 8

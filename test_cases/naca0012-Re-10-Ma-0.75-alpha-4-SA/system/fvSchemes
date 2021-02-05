@@ -21,10 +21,13 @@ ddtSchemes
 
 gradSchemes
 {
-    default         Gauss linear;
+    default         none;
 
     limited         cellLimited Gauss linear 1;
     grad(U)         $limited;
+    grad(p)         $limited;
+    grad(e)         $limited;
+    grad(nuTilda)   $limited;
     grad(k)         $limited;
     grad(omega)     $limited;
     grad(epsilon)   $limited;
@@ -34,29 +37,22 @@ divSchemes
 {
     default         none;
 
-    div(phi,U)      Gauss linearUpwind limited;
+    div(phi,U)      Gauss linearUpwindV limited;
 
     turbulence      Gauss linearUpwind limited;
     energy          Gauss linearUpwind limited;
 
-    div(phi,k)      $turbulence;
-    div(phi,omega)  $turbulence;
-    div(phi,epsilon) $turbulence;
-    div(phi,R)      $turbulence;
-    div(phi,v2)     $turbulence;
-    div(phi,nuTilda) bounded Gauss linearUpwind grad(nuTilda);
+    div(phi,k)       $turbulence;
+    div(phi,omega)   $turbulence;
+    div(phi,nuTilda) bounded Gauss linearUpwind limited;
 
     div(phi,e)      $energy;
     div(phi,K)      $energy;
     div(phi,Ekp)    $energy;
 
-    div(phiv,p)     Gauss upwind;
-    div(phid,p)     Gauss upwind;
-    div((phi|interpolate(rho)),p) Gauss upwind;
+    div(phiv,p)     Gauss linearUpwind limited;
+    div(phid,p)     Gauss linearUpwind limited;
 
-    div(R)                Gauss linear;
-    div((rho*R))          Gauss linear;
-    div(nonlinearStress)  Gauss linear;
     div(((rho*nuEff)*dev2(T(grad(U)))))    Gauss linear;
     div((nuEff*dev2(T(grad(U))))) Gauss linear;
     div(((rho*(thermo:mu|rho))*dev2(T(grad(U))))) Gauss linear;

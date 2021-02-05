@@ -16,25 +16,26 @@ FoamFile
 
 dimensions      [0 2 -1 0 0 0 0];
 
-internalField   uniform 0;
+internalField   uniform 1.5342e-5;
 
 boundaryField
 {
     inlet
     {
         type            calculated;
-        value           uniform 0;
+        value           uniform 1.5342e-5;
     }
 
     outlet
     {
         type            calculated;
-        value           uniform 0;
+        value           uniform 1.5342e-5;
     }
 
     airfoil
     {
-        type            zeroGradient;
+        type            fixedValue;
+        value           uniform 0;
     }
 
     front

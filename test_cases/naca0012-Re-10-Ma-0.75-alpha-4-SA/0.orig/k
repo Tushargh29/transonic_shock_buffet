@@ -38,8 +38,8 @@ boundaryField
 
     airfoil
     {
-        type            kqRWallFunction;
-        value           uniform $kInlet;
+        type            fixedValue;
+        value           uniform 0;
     }
 
     front

@@ -18,30 +18,34 @@ scale 0.59551673944687;
 
 domain
 {
-    xMin -4;
-    xMax  6;
-    yMin -2;
-    yMax  2;
+    xMin -20;
+    xMax  20;
+    yMin -10;
+    yMax  10;
     zMin -0.01;
     zMax  0.01;
 
     // Number of cells
     yCells  320; // airfoil to far field
-    yGap     24;  // resolution of trailing edge
-    xUCells 120;  // upstream
-    xMCellsLower 200; // middle low
-    xMCellsUpper 200; // middle up
-    xDCells 420; // downstream
+    yGap     32;  // resolution of trailing edge
+    xUCells 160;  // upstream
+    xMCellsLower 140; // middle low
+    xMCellsUpper 140; // middle up
+    xDCells 200; // downstream
 
 
     // Mesh grading
-    yGrading      500;  // airfoil to far field
-    xUGrading      10;  // towards centre upstream
-    xUGradingInv  0.1;  // inverse of xUGrading
-    xMGrading        5;  // towards trailing edge
-    xMGradingInv 0.2;  // towards trailing edge
-    xDGrading      40;  // downstream
-    xDGradingInv 0.025; // inverse of downstream grading
+    yGrading       20000;  // airfoil to far field
+    xUGrading          5;  // towards centre upstream
+    xUGradingInv     0.2;  // inverse of xUGrading
+    xUGradingUp       10;  // towards centre upstream, farfield
+    xUGradingUpInv   0.1;  // inverse of xUGrading, farfield
+    xMGrading        1.0;  // towards trailing edge
+    xMGradingInv     1.0;  // towards trailing edge
+    xMGradingUp     10.0;  // towards trailing edge, farfield
+    xMGradingUpInv   0.1;  // towards trailing edge, farfield
+    xDGrading        100;  // downstream
+    xDGradingInv    0.01;  // inverse of downstream grading
 }
 
 airfoil
@@ -49,6 +53,7 @@ airfoil
     xLead   0;
     yLead   0;
     xTrail  1;
+    xTrailShift 2;
     yTrailUpper  0.012;
     yTrailLower -0.012;
     xUpper  0.3;
@@ -76,7 +81,7 @@ geometry
 vertices
 (
     project ($airfoil.xLower $domain.yMin $domain.zMin) (cylinder)           // 0
-    ($airfoil.xTrail $domain.yMin $domain.zMin)                              // 1
+    ($airfoil.xTrailShift $domain.yMin $domain.zMin)                         // 1
     ($domain.xMax $domain.yMin $domain.zMin)                                 // 2
     project ($domain.xMin    $airfoil.yLead  $domain.zMin) (cylinder)        // 3
     project ($airfoil.xLead  $airfoil.yLead  $domain.zMin) (airfoil)         // 4
@@ -87,11 +92,11 @@ vertices
     project ($airfoil.xTrail $airfoil.yTrailUpper $domain.zMin) (airfoil)    // 9
     ($domain.xMax $airfoil.yTrailUpper $domain.zMin)                         // 10
     project ($airfoil.xUpper $domain.yMax $domain.zMin) (cylinder)           // 11
-    ($airfoil.xTrail $domain.yMax $domain.zMin)                              // 12
+    ($airfoil.xTrailShift $domain.yMax $domain.zMin)                         // 12
     ($domain.xMax $domain.yMax $domain.zMin)                                 // 13
 
     project ($airfoil.xLower $domain.yMin $domain.zMax) (cylinder)           // 14
-    ($airfoil.xTrail $domain.yMin $domain.zMax)                              // 15
+    ($airfoil.xTrailShift $domain.yMin $domain.zMax)                         // 15
     ($domain.xMax $domain.yMin $domain.zMax)                                 // 16
     project ($domain.xMin    $airfoil.yLead  $domain.zMax) (cylinder)        // 17
     project ($airfoil.xLead  $airfoil.yLead  $domain.zMax) (airfoil)         // 18
@@ -102,7 +107,7 @@ vertices
     project ($airfoil.xTrail $airfoil.yTrailUpper $domain.zMax) (airfoil)    // 23
     ($domain.xMax $airfoil.yTrailUpper $domain.zMax)                         // 24
     project ($airfoil.xUpper $domain.yMax $domain.zMax) (cylinder)           // 25
-    ($airfoil.xTrail $domain.yMax $domain.zMax)                              // 26
+    ($airfoil.xTrailShift $domain.yMax $domain.zMax)                         // 26
     ($domain.xMax $domain.yMax $domain.zMax)                                 // 27
 );
 
@@ -111,12 +116,12 @@ blocks
     // 0
     hex (18 19 14 17 4 5 0 3)
     ($:domain.xUCells $:domain.yCells 1)
-    simpleGrading ($:domain.xUGrading $:domain.yGrading 1)
+    edgeGrading ($:domain.xUGrading $:domain.xUGradingUpInv $:domain.xUGradingUpInv $:domain.xUGrading $:domain.yGrading $:domain.yGrading $:domain.yGrading $:domain.yGrading 1 1 1 1)
 
     // 1
     hex (19 20 15 14 5 6 1 0)
     ($:domain.xMCellsLower $:domain.yCells 1)
-    simpleGrading ($:domain.xMGradingInv $:domain.yGrading 1)
+    edgeGrading ($:domain.xMGradingInv $:domain.xMGradingUpInv $:domain.xMGradingUpInv $:domain.xMGradingInv $:domain.yGrading $:domain.yGrading $:domain.yGrading $:domain.yGrading 1 1 1 1)
 
     // 2
     hex (20 21 16 15 6 7 2 1)
@@ -126,12 +131,12 @@ blocks
     // 3
     hex (22 18 17 25 8 4 3 11)
     ($:domain.xUCells $:domain.yCells 1)
-    simpleGrading ($:domain.xUGradingInv $:domain.yGrading 1)
+    edgeGrading ($:domain.xUGradingInv $:domain.xUGradingUp $:domain.xUGradingUp $:domain.xUGradingInv $:domain.yGrading $:domain.yGrading $:domain.yGrading $:domain.yGrading 1 1 1 1)
 
     // 4
     hex (23 22 25 26 9 8 11 12)
     ($:domain.xMCellsUpper $:domain.yCells 1)
-    simpleGrading ($:domain.xMGrading $:domain.yGrading 1)
+    edgeGrading ($:domain.xMGrading $:domain.xMGradingUp $:domain.xMGradingUp $:domain.xMGrading $:domain.yGrading $:domain.yGrading $:domain.yGrading $:domain.yGrading 1 1 1 1)
 
     // 5
     hex (24 23 26 27 10 9 12 13)

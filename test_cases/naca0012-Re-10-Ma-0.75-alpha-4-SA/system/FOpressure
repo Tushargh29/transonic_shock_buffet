@@ -16,10 +16,10 @@ pressure
     rhoInf          1.186;
     UInf            (256.99743845  17.97101155 0);
 
-    executeControl  timeStep;
-    executeInterval 25;
-    writeControl    timeStep;
-    writeInterval   25;
+    executeControl  writeTime;
+    executeInterval 1;
+    writeControl    writeTime;
+    writeInterval   1;
 }
 
 // ************************************************************************* //

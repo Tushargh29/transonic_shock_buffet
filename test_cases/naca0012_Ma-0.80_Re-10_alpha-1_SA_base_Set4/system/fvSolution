@@ -22,6 +22,7 @@ solvers
         smoother        GaussSeidel;
         tolerance       1e-6;
         relTol          0.01;
+        minIter         1;
     }
 
     pFinal
@@ -36,6 +37,7 @@ solvers
         preconditioner  DILU;
         tolerance       1e-6;
         relTol          0.1;
+        minIter         1;
     }
 
     "(rho|U|k|omega|e|epsilon|R|nuTilda)Final"

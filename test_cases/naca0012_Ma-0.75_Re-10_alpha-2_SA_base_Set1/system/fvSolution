@@ -1,4 +1,4 @@
-/*--------------------------------*- C++ -*----------------------------------*\
+	/*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
 |  \\    /   O peration     | Version:  v2006                                 |
@@ -22,6 +22,7 @@ solvers
         smoother        GaussSeidel;
         tolerance       1e-6;
         relTol          0.01;
+        minIter         1
     }
 
     pFinal

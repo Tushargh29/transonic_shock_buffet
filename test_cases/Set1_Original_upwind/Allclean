@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# simulation directory
+case=$(pwd)
+
+# image location
+image="../../of2006-py1.6-cpu.sif"
+
+# singularity commands for serial and parallel execution
+runSerial="singularity exec ${image} bash -c"
+$runSerial ". /usr/lib/openfoam/openfoam2006/bin/tools/CleanFunctions && cleanCase" $case
+
+#------------------------------------------------------------------------------

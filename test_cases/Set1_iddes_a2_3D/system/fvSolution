@@ -51,7 +51,7 @@ PIMPLE
 {
     momentumPredictor   yes;
     transonic           yes;
-    nOuterCorrectors    3;
+    nOuterCorrectors    5;
     nCorrectors         1;
     nNonOrthogonalCorrectors 1;
     consistent          yes;

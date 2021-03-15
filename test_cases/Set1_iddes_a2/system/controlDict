@@ -28,7 +28,7 @@ deltaT          1.0e-6;
 
 writeControl    adjustable;
 
-writeInterval   0.005;
+writeInterval   0.001;
 
 purgeWrite      0;
 
@@ -57,6 +57,7 @@ functions
     #include "FOforces"
     #include "FOpressure"
     #include "FOsurfaceSample"
+    #include "FOIDDES"
     #includeFunc solverInfo
 }
 

@@ -35,7 +35,7 @@ domain
 
 
     // Mesh grading
-    yGrading       40000;  // airfoil to far field
+    yGrading       10000;  // airfoil to far field
     yGradingFar     1000;  // airfoil to far field at xMax
     xUGrading          5;  // towards centre upstream
     xUGradingInv     0.2;  // inverse of xUGrading

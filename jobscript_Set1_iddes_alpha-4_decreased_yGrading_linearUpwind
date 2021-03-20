@@ -3,7 +3,7 @@
 #SBATCH --nodes=1
 #SBATCH --time=48:00:00
 #SBATCH --job-name=na12
-#SBATCH --ntasks-per-node=16
+#SBATCH --ntasks-per-node=8
 
 module load singularity/3.6.0rc2
 module load mpi/openmpi/4.0.1/cuda_aware_gcc_6.3.0
@@ -11,4 +11,4 @@ module load mpi/openmpi/4.0.1/cuda_aware_gcc_6.3.0
 mkdir -p run
 cp -r test_cases/Set1_iddes_alpha-4_decreased_yGrading_linearUpwind run/
 cd run/Set1_iddes_alpha-4_decreased_yGrading_linearUpwind
-./Allrun 16
+./Allrun 8
